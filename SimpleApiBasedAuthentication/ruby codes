@@ -1,0 +1,39 @@
+def reverseString(str)
+    str=str.reverse
+end
+
+
+def pcheck(str)
+    str==str.reverse
+end
+
+
+
+(1..100).each do |n|
+    if n%3==0 && n%5==0
+        puts "FizzBizz"
+    elsif n%3==0
+        puts ""
+    elsif n%5==0
+        puts ""
+    else 
+        puts n
+    end
+end
+
+def factorial(n)
+    if n==0 || n==1
+        return 1
+    else
+        return n * factorial(n-1)
+end
+
+def findMissing(n)
+    l=n+1
+    expected=n*(n+1)/2
+    for i in 1..l
+        sum+=i
+    actual=sum
+    missing_number=expected-actual
+end
+

@@ -1,0 +1,80 @@
+install the 'bcrypt' gem -> password hashing 
+
+gem install bcrypt 
+
+app/models/user.rb
+
+
+class User < ApplicationRecord
+    attr_accessor :id, :username ,:password_hash , :mobile_number , :otp  
+
+    def initialize( id,username, password_hash,mobile_number)
+        @id=id
+        @username=username
+        @passwword=Bcrypt::Password.create(password)
+        @mobile_number=mobile_number
+        otp=nil
+    end
+
+    def authenticate(password)
+        Bcrypt::Password.create(password)=password
+    end
+
+    def generate_otp 
+        @otp=rand(otp)
+    end
+
+    def verify_otp(otp)
+        @otp==otp
+    end
+end
+
+
+Implement authentication logic in controller
+
+class ApplicationController
+    def initialize
+        @users = [] -> replace with DB 
+    end
+
+    def create_user(username, password, mobile_number)
+        user_id=@users.length + 1
+        user=User.new(user_id,username,password,mobile_number)
+        @users<<user
+    end
+
+    def find_user_by_username(username)
+        @users.find(|user| user.username==username)
+    end
+
+    def authenticate_user(username,password)
+        user=find_by_username(username)
+        return nil unless user 
+        user.authenticate(password)? user : nil
+    end 
+
+    def send_otp(user)
+        user.generate_otp
+        #implement code to send otp here using user's mobile number 
+    end
+
+    def verify_otp(user,otp)
+        user.verify_otp(otp)
+    end
+end
+
+
+Now use the authenticate logic in your application
+
+require 'bcrypt'
+require_relative 'app/models/user'
+require_relative 'app/contrllers/application_controller'
+
+#register a new user 
+
+user=application_controller.create_user('johndoe','pwd','1234567891')
+
+authenticate_user=application_controller.authenticate_user()
+
+
+

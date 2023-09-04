@@ -1,0 +1,18 @@
+rails new myapi --api
+
+rails generate controller HelloWorld
+
+api/controllers/hello_world_controller.rb
+
+class HelloWorldContrller < ApplicationController
+    def hello
+        render json: {message: "Hello"}
+    end
+end
+
+
+in the config.rb
+
+Rails.application.routes do
+    get '/hello', to: 'hello_world#hello'
+end

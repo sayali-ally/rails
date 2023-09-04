@@ -1,0 +1,25 @@
+rails new sample-api --api
+cd sample-api 
+
+1.creater controller 
+rails g controller api/v1/products index show create  
+routes will also get created automatically in routes.rb 
+
+
+2.create model 
+rails g model product name:string brand:string price:string 
+using this migration file also gets created 
+
+
+3. change database.yml -> development : database name 
+
+4. rake db:create
+5. rake db:migrate  
+6. rails s -> starts the server 
+
+7. go and fill the fucntions in products controller 
+
+
+def index
+    render json: {message: "hello"}
+end

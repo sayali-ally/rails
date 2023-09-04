@@ -1,0 +1,24 @@
+1.generate a user model with necessary attributes like name and email 
+
+rails g model User email:string password:string 
+
+
+2.create an authentication controller
+rails g controller Api::Auth create 
+
+Controller will look like this 
+def create
+    user=User.new(user_params);
+    if user.save 
+        render json: {message: 'User registered Successfully'}, status:created
+    else
+        render json: {message: 'error'}, status: :unprocessable_entity
+    end
+end
+
+
+private 
+
+def user_params
+    params.require(:user).permit(:email,:password);
+end
